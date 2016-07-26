@@ -77,7 +77,7 @@ def testSerializer(element):
                 while next_element is not None:
                     serializeElement(next_element, indent + 2)
                     next_element = next_element.getnext()
-            elif isinstance(element, str) or isinstance(element, bytes):
+            elif isinstance(element, (str, bytes)):
                 # Text in a fragment
                 assert isinstance(element, str) or sys.version_info[0] == 2
                 rv.append("|%s\"%s\"" % (' ' * indent, element))
@@ -191,12 +191,12 @@ class TreeBuilder(base.TreeBuilder):
                     value = {}
                 self._element = element
                 dict.__init__(self, value)  # pylint:disable=non-parent-init-called
-                for key, value in self.items():
+                for key, value2 in self.items():
                     if isinstance(key, tuple):
                         name = "{%s}%s" % (key[2], infosetFilter.coerceAttribute(key[1]))
                     else:
                         name = infosetFilter.coerceAttribute(key)
-                    self._element._element.attrib[name] = value
+                    self._element._element.attrib[name] = value2
 
             def __setitem__(self, key, value):
                 dict.__setitem__(self, key, value)
