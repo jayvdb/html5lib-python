@@ -15,7 +15,7 @@ cache:
 
 env:
   global:
-  - USE_OPTIONAL=true
+  - USE_OPTIONAL=false
   - TRAVIS_PIP_VERSION=6.0.8
   - SETUPTOOLS_VERSION=10.2.1
   matrix:
