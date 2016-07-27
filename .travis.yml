@@ -14,22 +14,21 @@ cache:
     - $HOME/.cache/pip
 
 env:
-  - USE_OPTIONAL=true
-  - USE_OPTIONAL=false
+  - USE_OPTIONAL=true TOXENV=optional
+  - USE_OPTIONAL=false TOXENV=base
 
 before_install:
   - git submodule update --init --recursive
 
 install:
-  - bash requirements-install.sh
+  - pip install tox codecov
 
 script:
-  - if [[ $TRAVIS_PYTHON_VERSION == pypy* ]]; then py.test; fi
-  - if [[ $TRAVIS_PYTHON_VERSION != pypy* ]]; then coverage run -m pytest; fi
-  - bash flake8-run.sh
+  - tox
+  - codecov
 
 after_script:
   - python debug-info.py
 
 after_success:
-  - if [[ $TRAVIS_PYTHON_VERSION != pypy* ]]; then coverage combine && codecov; fi
+  # codecov
