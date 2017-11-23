@@ -10,7 +10,7 @@ build: off
 
 test_script:
   # Avoid py35-optional, as pypi does not have lxml wheels for py35
-  - python -m tox -e "py36-base,py35-base,{py27,py33,py34}-{base,optional}"
+  - python -m tox -e "py36-{base,optional},py35-base,{py27,py33,py34}-{base,optional}"
 
 after_test:
   - python debug-info.py
