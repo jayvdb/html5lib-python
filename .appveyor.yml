@@ -4,13 +4,14 @@ init:
 
 install:
   - git submodule update --init --recursive
-  - python -m pip install tox
+  - python -m pip install tox codecov
 
 build: off
 
 test_script:
   # Avoid py35-optional, as pypi does not have lxml wheels for py35
-  - python -m tox -e "py35-base,{py27,py33,py34}-{base,optional}"
+  - coverage run python -m tox -e "py35-base,{py27,py33,py34}-{base,optional}"
 
 after_test:
   - python debug-info.py
+  - codecov
