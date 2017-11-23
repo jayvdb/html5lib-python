@@ -5,7 +5,6 @@ flake8-docstrings
 flake8-string-format
 flake8-future-import
 flake8-debugger
-flake8-print
 hacking
 flake8-tuple
 flake8-dodgy
